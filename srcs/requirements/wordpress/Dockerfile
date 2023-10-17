@@ -31,3 +31,9 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 #Copy php config file from the host machine to the docker
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+#Copy script for wordpress installation and configuration
+COPY ./tools/wpscript.sh ./wp-script.sh
+RUN chmod +x ./wp-script.sh
+
+CMD ["sh", "wp-script.sh"]
+

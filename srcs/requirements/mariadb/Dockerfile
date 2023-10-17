@@ -12,7 +12,7 @@ RUN chmod +x /etc/mysql/db_create.sh
 COPY ./tools/export.sh /etc/mysql/export.sh
 RUN chmod +x /etc/mysql/export.sh
 
-EXPOSE 3306
+#EXPOSE 3306
 
-#CMD ["sh", "/etc/mysql/db_create.sh"]
+CMD ["sh", "/etc/mysql/db_create.sh"]
 
