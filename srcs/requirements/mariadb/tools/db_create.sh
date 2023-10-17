@@ -15,4 +15,6 @@ mariadb -u root -p${SQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 mysqladmin -u root --password=${SQL_ROOT_PASSWORD} shutdown
 #mysqladmin -u root shutdown
 
+sleep 1;
+
 exec mysqld_safe
