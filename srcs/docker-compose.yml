@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+    nginx:
+        container_name: nginx
+        build: ./requirements/nginx/
+        restart: always
+        ports:
+                - 443:443
+        env_file: .env
+        depends_on:
+                - wordpress
+        networks: 
+                - inception
+
+    mariadb:
+        container_name: mariadb
+        build: ./requirements/mariadb/
+        restart: always
+        ports:
+                - 3306
+        env_file: .env
+        networks:
+                - inception
+        volumes: 
+                - /home/pgros/data/database:/var/lib/mysql
+        healthcheck:
+                test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
+                interval: 5s
+                timeout: 1s
+                retries: 20
+                start_period: 5s
+
+    wordpress:
+        container_name: wordpress
+        build: ./requirements/wordpress/
+        restart: always
+        ports:
+                - 9000
+        env_file: .env
+        depends_on:
+                mariadb:
+                        condition: service_healthy
+        networks:
+                - inception
+        volumes: 
+                - website:/var/www/wordpress
+
+networks:
+        inception:
+                name: inception
+
+volumes:
+        website:
+                driver: local
+                driver_opts:
+                        type: 'none'
+                        o: 'bind'
+                        device: ':/home/pgros/data/wp_website'

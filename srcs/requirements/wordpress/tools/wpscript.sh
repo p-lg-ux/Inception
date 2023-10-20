@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 7;
+
 cd /var/www/wordpress
 
 if ! [ -f ./wp-config.php ]
@@ -14,12 +16,14 @@ then
 					 --title=${SITE_TITLE} \
 					 --admin_user=${ADMIN_USER} \
 					 --admin_password=${ADMIN_PASSWORD} \
-					 --admin_email=${ADMIN_EMAIL}
+					 --admin_email=${ADMIN_EMAIL} \
+					 --path='/var/www/wordpress'
 	
 	sudo -u www-data wp user create ${USER1_LOGIN} ${USER1_EMAIL} \
-					--user_pass=${USER1_PASSWORD}
+					--user_pass=${USER1_PASSWORD} \
+					--path='/var/www/wordpress'
 					
-	sudo -u www-data wp cache flush
+	sudo -u www-data wp cache flush --path='/var/www/wordpress'
 					
 fi
 
@@ -28,6 +32,4 @@ then
 	mkdir /run/php
 fi
 
-exec /usr/sbin/php-fpm7.3 -F
-
-
+exec /usr/sbin/php-fpm7.4 -F

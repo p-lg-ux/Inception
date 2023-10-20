@@ -1,6 +1,9 @@
 #!/bin/bash
 
+mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 service mariadb start;
+
+#echo "finished mariadb start"
 
 sleep 1;
 
@@ -16,5 +19,8 @@ mysqladmin -u root --password=${SQL_ROOT_PASSWORD} shutdown
 #mysqladmin -u root shutdown
 
 sleep 1;
+
+echo "try find"
+find / -type s
 
 exec mysqld_safe
