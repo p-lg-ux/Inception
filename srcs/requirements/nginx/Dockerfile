@@ -16,8 +16,10 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 443
 
-RUN chmod 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
+RUN mkdir -p /var/www/wordpress
+
+RUN chmod 755 /var/www
+RUN chown -R www-data:www-data /var/www
 
 CMD ["nginx", "-g", "daemon off;"]
 #CMD ["nginx", "-v"]

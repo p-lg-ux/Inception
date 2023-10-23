@@ -13,6 +13,8 @@ services:
                 - wordpress
         networks: 
                 - inception
+        volumes:
+                - website:/var/www/wordpress
 
     mariadb:
         container_name: mariadb
@@ -24,7 +26,7 @@ services:
         networks:
                 - inception
         volumes: 
-                - /home/pgros/data/database:/var/lib/mysql
+                - database:/var/lib/mysql
         healthcheck:
                 test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
                 interval: 5s
@@ -52,9 +54,17 @@ networks:
                 name: inception
 
 volumes:
-        website:
+        database:
+                name: database
                 driver: local
                 driver_opts:
                         type: 'none'
                         o: 'bind'
-                        device: ':/home/pgros/data/wp_website'
+                        device: '/home/pgros/data/database'
+        website:
+                name: website
+                driver: local
+                driver_opts:
+                        type: 'none'
+                        o: 'bind'
+                        device: '/home/pgros/data/wp_website'
