@@ -12,7 +12,7 @@ then
 					  --dbhost=${SQL_HOST} \
 					  --path='/var/www/wordpress'
 					  
-	sudo -u www-data wp core install --url=http://${DOMAIN_NAME} \
+	sudo -u www-data wp core install --url=https://${DOMAIN_NAME} \
 					 --title=${SITE_TITLE} \
 					 --admin_user=${ADMIN_USER} \
 					 --admin_password=${ADMIN_PASSWORD} \

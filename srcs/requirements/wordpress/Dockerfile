@@ -14,10 +14,10 @@ RUN apt-get install -y php7.4\
 			mariadb-client
 			
 #Download wordpress
-RUN wget https://fr.wordpress.org/wordpress-6.3-fr_FR.tar.gz -P /var/www 
+RUN wget https://fr.wordpress.org/wordpress-6.2-fr_FR.tar.gz -P /var/www 
 RUN cd /var/www \
-	&& tar -xzf wordpress-6.3-fr_FR.tar.gz\
-	&& rm wordpress-6.3-fr_FR.tar.gz
+	&& tar -xzf wordpress-6.2-fr_FR.tar.gz\
+	&& rm wordpress-6.2-fr_FR.tar.gz
 
 RUN chown -R www-data:www-data /var/www/*
 RUN chmod -R 755 /var/www/*	
