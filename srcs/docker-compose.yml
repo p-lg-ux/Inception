@@ -20,15 +20,15 @@ services:
         container_name: mariadb
         build: ./requirements/mariadb/
         restart: always
-        ports:
-                - 3306
+      #  ports:
+               # - 3306
         env_file: .env
         networks:
                 - inception
         volumes: 
                 - database:/var/lib/mysql
         healthcheck:
-                test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
+                test: mysqladmin ping --host=localhost -u ${SQL_USER} -p${SQL_PASSWORD}
                 interval: 5s
                 timeout: 1s
                 retries: 20
@@ -38,8 +38,8 @@ services:
         container_name: wordpress
         build: ./requirements/wordpress/
         restart: always
-        ports:
-                - 9000
+        #ports:
+               # - 9000
         env_file: .env
         depends_on:
                 mariadb:

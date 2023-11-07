@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 7;
+#sleep 7;
 
 cd /var/www/wordpress
 
